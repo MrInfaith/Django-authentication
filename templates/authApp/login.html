@@ -1,0 +1,40 @@
+{% extends 'layout/app.html' %}
+
+
+{% block content %}
+
+  
+<div class="row justify-content-center">
+    <div class="col-sm-6">
+        <h2 class='text-muted'>Login</h2>
+        {% if form.non_field_errors %}
+        <small class="text-danger">
+            {{form.non_field_errors.as_ul}}
+        </small>
+        {% endif %}
+        <form method="POST" action="{%url 'login' %}">
+
+           {%csrf_token%}
+            <!-- creating div for username  -->
+           <div class="form-group">
+            <label for="{{form.username.id_for_label}}">Username:</label>
+            <input type="text" name="{{form.username.name}}" class="form-control" value="{{form.username.value}}"/>
+            <span class="text-danger">{{form.username.errors}}</span>
+           </div>
+           <!-- creating div for password  -->
+           <div class="form-group">
+            <label for="{{form.password.id_for_label}}">Password :</label>
+            <input type="password" name="{{form.password.name}}" class="form-control" value="{{form.password.value}}"/>
+            <span class="text-danger">{{form.password.errors}}</span>
+           </div>
+            <br>
+              <!-- form submission button -->
+            <button type="submit" class="btn btn-dark">Login</button>
+            <p>
+              If you don't have account?
+               <a href="{% url 'register' %}">register</a>
+               </p>
+        </form>
+    </div>
+</div>
+{% endblock %}
